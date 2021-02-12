@@ -27,10 +27,14 @@ InfoMando Mimando;
  
 void setup(void)
 {
+  
 pinMode(SW,INPUT);
 pinMode(A0,INPUT);
 pinMode(A1,INPUT);
+
    radio.begin();
+     radio.setAutoAck(0);
+    
    radio.openWritingPipe(direccion);
 
  // el modo de funciona
@@ -39,13 +43,14 @@ pinMode(A1,INPUT);
  
 void loop(void)
 {
-Mimando.JoyIzq = analogRead(A0);
-Mimando.JoyDer = analogRead(A1);
-Mimando.Botones =  digitalRead(SW);
+Mimando.JoyIzq = 30;//analogRead(A0);
+Mimando.JoyDer = 40;//analogRead(A1);
+Mimando.Botones =  6;//digitalRead(SW);
   
   radio.write(&Mimando, sizeof Mimando);
-   //radio.write(&data, sizeof data);
-   delay(50);
+   radio.write(&data, sizeof data);
+
+  
 }
 
 /*   joys1, joys2    -> 1 lecturas depotencometros cada 1  -> 2 int 8 bits*2 = 2 bytes 
